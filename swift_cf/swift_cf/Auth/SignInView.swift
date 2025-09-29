@@ -7,10 +7,15 @@
 
 import SwiftUI
 
+@MainActor
 final class SignInViewModel: ObservableObject {
 
     @Published var email = ""
     @Published var password = ""
+    
+    func signIn() {
+        
+    }
 }
 
 struct SignInView: View {
