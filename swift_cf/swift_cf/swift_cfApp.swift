@@ -5,8 +5,8 @@
 //  Created by Сергей Недведский on 7.09.25.
 //
 
-import SwiftUI
 import Firebase
+import SwiftUI
 
 @main
 struct swift_FCApp: App {
@@ -15,7 +15,7 @@ struct swift_FCApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
     }
 }
@@ -31,4 +31,3 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 }
-

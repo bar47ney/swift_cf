@@ -12,9 +12,26 @@ final class SignInViewModel: ObservableObject {
 
     @Published var email = ""
     @Published var password = ""
-    
+
     func signIn() {
-        
+        guard !email.isEmpty, !password.isEmpty else {
+            print("No email or password found.")
+            return
+        }
+
+        Task {
+            do {
+                let returnedUsrdata = try await AuthManager.shared.createUser(
+                    email: email,
+                    password: password
+                )
+                print("Successfully signed in: \(returnedUsrdata)")
+
+            } catch {
+                print("Error signing in: \(error.localizedDescription)")
+            }
+        }
+
     }
 }
 
@@ -34,7 +51,7 @@ struct SignInView: View {
                 .background(Color.gray.opacity(0.4))
                 .cornerRadius(10)
             Button {
-
+                viewModel.signIn()
             } label: {
                 Text("Sign In")
                     .font(.headline)
@@ -44,7 +61,7 @@ struct SignInView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-            
+
             Spacer()
         }
         .padding()
@@ -53,7 +70,7 @@ struct SignInView: View {
 }
 
 #Preview {
-    NavigationStack{
+    NavigationStack {
         SignInView()
     }
 }
